@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄诗敏-品优购购物车结算页</title>
+    <link rel="stylesheet" href="./CSS/header-顶栏.css">
+    <link rel="stylesheet" href="./icomoon/style.css">
+    <link rel="stylesheet" href="./CSS/header-search.css">
+    <link rel="stylesheet" href="./CSS/common.css">
+    <link rel="icon" href="./bitbug_favicon.ico">
+    <link rel="stylesheet" href="./CSS/footer.css">
+    <style>
+        /* 全部商品 开始 */
+        /* 字体 “全部商品” */
+        .h3-16red {
+            color: #c81623;
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 0;
+        }
+
+        /* 全部商品 菜单栏开始 */
+        .allgoods-ul {
+            display: grid;
+            grid-template-columns: 255px 360px 120px 195px 160px 110px;
+            grid-template-rows: 35px;
+            border: 1px solid #dddddd;
+            background-color: #f5f5f5;
+        }
+
+        .agoods-item {
+            line-height: 35px;
+            color: #666666;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .rows-son3,
+        .agoods-item4 {
+            justify-self: center;
+        }
+
+        .goods-label {
+            background-color: #f2f2f2;
+            border: 1px solid #999999;
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 10px 0 5px;
+        }
+
+        /* 复选框精灵图 */
+        #allcheck:checked+.goods-label,
+        #check1th:checked~.rows1 .rows-son1 .goods-label,
+        #checkzy:checked+label,
+        #check2th:checked~.rows2 .rows-son1 .goods-label,
+        #check3th:checked~.rows3 .rows-son1 .goods-label,
+        #check4th:checked~.rows4 .rows-son1 .goods-label,
+        #check5th:checked~.rows5 .rows-son1 .goods-label,
+        #checkh1:checked~.checkh1 label,
+        #allcheckdel:checked+.goods-label {
+            background: url("./images/checked.png") no-repeat center;
+        }
+
+        #check1th:checked~.rows1,
+        #check2th:checked~.rows2,
+        #check3th:checked~.rows3,
+        #check4th:checked~.rows4,
+        #check5th:checked~.rows5 {
+            background-color: #feedef;
+        }
+
+        .under-menu {
+            height: 45px;
+            border-bottom: 1.5px solid #dddddd;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            padding-bottom: 5px;
+            box-sizing: border-box;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        /* 字体样式 */
+
+        .font12-3 {
+            font-size: 12px;
+            color: #333333;
+        }
+
+        .font12-9 {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .fontred {
+            color: #c81623 !important;
+        }
+
+        /* 字体样式 结束 */
+        #checkzy+label {
+            margin-bottom: 3px;
+        }
+
+        /* 购物清单 开始 */
+        .shoppinglist {
+            display: grid;
+            grid-template-rows: 110px 205px 110px 110px;
+        }
+
+        .shoppinglist2 {
+            display: grid;
+            grid-template-rows: 205px;
+        }
+
+        /*清单 行 */
+        .rows {
+            display: grid;
+            grid-template-columns: 615px 120px 195px 160px 110px;
+            padding: 13px 0;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        /* 第一行 */
+        .rows1,
+        .rows6 {
+            border-top: 1px solid #dddddd;
+
+        }
+
+        .top-70 {
+            position: relative;
+            top: -70px;
+        }
+
+        .img-gift {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+        }
+
+        .img-gift {
+            background-position: -525px -77px;
+            margin-top: 2px;
+            vertical-align: bottom;
+
+        }
+
+        .rows-son1font2 {
+            margin: 0 0 0 25px;
+            position: relative;
+            top: -69px;
+        }
+
+        .rows-son1font1 {
+            display: inline-block;
+            position: relative;
+            top: -39px;
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        .money {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* 加减按钮 */
+        .numbutton {
+            border: 1px solid #dddddd;
+            display: grid;
+            grid-template-columns: 30px 40px 30px;
+            grid-template-rows: 30px;
+            width: 100px;
+            text-align: center;
+            line-height: 30px;
+            background-color: #fff;
+        }
+
+        .but1,
+        .num {
+            border-right: 1px solid #dddddd;
+        }
+
+        .rows21-zp {
+            display: flex;
+            width: 320px;
+            justify-content: space-between;
+            margin-left: 55px;
+        }
+
+        .paybutton {
+            background-color: #e60012;
+            position: absolute;
+            right: 0;
+            height: 40px;
+            width: 110px;
+            text-align: center;
+            line-height: 40px;
+            bottom: -1px;
+            display: inline-block;
+            color: #fff;
+            letter-spacing: 5px;
+        }
+
+        .del-tip {
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .repurchase {
+            height: 32px;
+            background-color: #fffdee;
+            line-height: 32px;
+            display: grid;
+            grid-template-columns: 540px 308px 185px 170px;
+        }
+
+        .repurchase span:nth-of-type(1) {
+            margin-left: 15px;
+        }
+
+        .repurchase div a {
+            margin: 10px;
+        }
+
+        /* 猜你喜欢 特惠购物 开始 */
+        .shoppingcar-like {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .like-title {
+            height: 40px;
+            background-color: #f1f1f1;
+        }
+
+        .like-title a {
+            display: inline-block;
+            width: 85px;
+            height: 40px;
+            text-align: center;
+            line-height: 35px;
+            box-sizing: border-box;
+        }
+
+        .like-contentdiv {
+            display: flex;
+            border-style: dashed none dashed dashed;
+            border-width: 1px;
+            border-color: #dddddd;
+            width: 990px;
+            height: 305px;
+            margin: 20px;
+        }
+
+        .like-contentdiv>div {
+            flex: 1;
+            border-right: 1px dashed #dddddd;
+            display: inline-flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            line-height: 25px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .like-img {
+            background: url("./images/shoppingcar猜你喜欢.png") no-repeat center;
+            width: 238px;
+            height: 243px;
+            display: inline-block;
+        }
+
+        .like-img1 {
+            background-position: -7px -8px;
+        }
+
+        .like-img2 {
+            background-position: -256px -9px;
+        }
+
+        .like-img3 {
+            background-position: -503px -9px;
+        }
+
+        .like-img4 {
+            background-position: -750px -9px;
+        }
+
+        .join-shoppingc {
+            display: inline-block;
+            border: 1px solid #dddddd;
+            width: 120px;
+            height: 25px;
+            line-height: 25px;
+            vertical-align: middle;
+        }
+
+        .join-shoppingc::before {
+            background-position: -416px -135px;
+            width: 28px;
+            height: 22px;
+            /* 用::before、::after伪元素插入精灵图时，要记得加入以下两个属性*/
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+    <link rel="stylesheet" href="./CSS/导航栏（竖）.css">
+</head>
+
+<body>
+    <div class="paymentPage">
+        <div class="guiding" style="z-index: 1000;">
+            <div class="middle"><a class="font" href="../首页.html">首页</a>
+                <a class="font" href="./品优购-登录.html">上一题</a>
+                <a class="font" href="./品优购-提交订单.html">下一题</a>
+                <!-- <a class="font" href="">源码</a>
+                <div class="sound-code">
+                    <xmp></xmp>
+                </div> -->
+            </div>
+        </div>
+        <!-- 顶部开始 -->
+        <div class="header">
+            <!-- 顶栏开始 -->
+            <div class="header-topest">
+                <div class="header-toper">
+                    <p class="header-topleft"><span>品优购欢迎您！</span><a href="./品优购-登录.html" class="padd-htl">请登录</a><a
+                            href="./品优购-注册.html" class="padd-htl">免费注册</a></p>
+
+                    <ul class="header-topright">
+                        <li><a href="" class="padd-htr">我的订单</a></li>
+                        <li style="height: 9px;width: 0;border-right: 1px solid #666666;"></li>
+                        <li><a href="" class="padd-htr">我的品优购</a><i class="iconfont icon-ctrl3"></i></li>
+                        <li style="height: 9px;width: 0;border-right: 1px solid #666666;"></li>
+                        <li><a href="" class="padd-htr">品优购会员</a></li>
+                        <li style="height: 9px;width: 0;border-right: 1px solid #666666;"></li>
+                        <li><a href="" class="padd-htr">企业采购</a></li>
+                        <li style="height: 9px;width: 0;border-right: 1px solid #666666;"></li>
+                        <li><a href="" class="padd-htr">关注品优购</a><i class="iconfont icon-ctrl3"></i></li>
+                        <li style="height: 9px;width: 0;border-right: 1px solid #666666;"></li>
+                        <li><a href="" class="padd-htr">客户服务</a><i class="iconfont icon-ctrl3"></i></li>
+                        <li style="height: 9px;width: 0;border-right: 1px solid #666666;"></li>
+                        <li><a href="" class="padd-htr">网站导航</a><i class="iconfont icon-ctrl3"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 顶栏结束 -->
+            <!-- 搜索框开始 -->
+            <div class="search-con">
+                <div class="search-main">
+                    <div class="search-logo" style="font-size:19px;color: #333333;">
+                        <a style="display: inline-block;" href="./品优购-主页.html"><img src="./images/logo.png" alt=""></a>
+                    </div>
+                    <div class="search-div">
+                        <form action="" id="search-fo">
+                            <div class="search-inputdiv">
+                                <input type="text" class="inp" autofocus="autofocus" placeholder="自营">
+                            </div>
+                            <button class="inp-but">搜索</button>
+                        </form>
+                    </div>
+                    <style>
+                        .search-div {
+                            top: 0;
+                            left: 0;
+                            float: right;
+                            margin: 32px 0 0;
+                        }
+                    </style>
+                </div>
+            </div>
+            <!-- 搜索框结束 -->
+        </div>
+        <!-- header 结束 -->
+        <!-- 全部商品 开始 -->
+        <div class="allgoods-con">
+            <div class="banxin">
+                <h3 class="h3-16red">全部商品 11</h3>
+                <div class="allgoods-menu">
+                    <ul class="allgoods-ul">
+                        <li class="agoods-item agoods-item1">
+                            <input type="checkbox" id="allcheck" hidden>
+                            <input type="checkbox" for="allcheck" class="goods-label" id="checkWhole" name="checkWhole">
+                            <label for="allcheck">全选</label>
+                        </li>
+                        <li class="agoods-item agoods-item2">商品</li>
+                        <li class="agoods-item agoods-item3">单价（元）</li>
+                        <li class="agoods-item agoods-item4">数量</li>
+                        <li class="agoods-item agoods-item5">小计（元）</li>
+                        <li class="agoods-item agoods-item6">操作 </li>
+                    </ul>
+                </div>
+                <!-- 传智自营 开始-->
+                <div class="under-menu">
+                    <input type="checkbox" id="checkzy" hidden>
+                    <label for="checkzy" class="goods-label"></label>
+                    <label for="checkzy" class="bgc-red">传智自营</label>
+                    <div style="position: absolute;right: 0;">
+                        <span class="font12-3">运费:￥6.00</span>&nbsp;
+                        <span class="fontred font12-3">还差¥99.00免运费</span>
+                    </div>
+                </div>
+                <!-- 传智自营 结束-->
+                <!-- 购物车列表 开始 -->
+
+                <div class="shoppinglist">
+                    <input type="checkbox" id="check1th" hidden>
+                    <input type="checkbox" id="check2th" hidden>
+                    <input type="checkbox" id="check3th" checked="checked" hidden>
+                    <input type="checkbox" id="check4th" hidden>
+                    <input type="checkbox" id="check5th" hidden>
+
+                    <label for="check1th" class="rows rows1">
+                        <!-- 格子1 -->
+                        <div class="rows-son1">
+                            <input type="checkbox" for="check1th" class="goods-label top-70" name="checkItems">
+                            <img src="./images/shppingcar苹果.png" alt="苹果（Apple）MD463FE/A MAC">
+                            <div class="rows-son1font1">
+                                <li class="font12-3">苹果（Apple）MD463FE/A MAC </li>
+                                <li class="font12-3">Thunderbolt雷电接口 至千兆以太网转</li>
+                                <li class="font12-9"><i class="img-gift"></i> 购买礼品包装</li>
+                            </div>
+                            <span class="font12-3 rows-son1font2">尺码：Thunderbolt至千兆...</span>
+                        </div>
+                        <!-- 格子2 -->
+                        <div class="rows-son2">
+                            <span class="money">248.00</span>
+                        </div>
+                        <!-- 格子3 -->
+                        <div class="rows-son3">
+                            <div class="numbutton">
+                                <div class="but1 ">-</div>
+                                <div class="num money">1</div>
+                                <div class="but2 fontred">+</div>
+                            </div>
+                            <div class="font12-9" style="text-align: center;">有货</div>
+                        </div>
+                        <!-- 格子4 -->
+                        <div><span class="money">248.00</span></div>
+                        <!-- 格子5 -->
+                        <div class="rows-son5">
+                            <li class="font12-3">删除</li>
+                            <li class="font12-3">移到我的关注</li>
+                        </div>
+                    </label>
+                    <!-- </label> -->
+                    <label for="check2th" class="rows rows2">
+                        <!-- 格子1 -->
+                        <div class="rows-son1">
+                            <h1 style="margin: 0 0 10px;font-weight: normal;" class="font12-9"><a
+                                    class="fontred font12-9" href=""
+                                    style="display: inline-block;padding: 0px 7px;border: 1px solid #c81623;">换购</a><a
+                                    href="" class="font12-9"> 活动商品购满2888.00，即可加价换购商品1件
+                                    > </a><a href="" class="bgc-red" style="margin-left: 15px;">查看换购品</a> <a href=""
+                                    class="font12-9">去凑单 ></a></h1>
+                            <input type="checkbox" for="check2th" class="goods-label top-70" name="checkItems">
+                            <img src="./images/shoppingcar笔记本银色.png" alt="Apple Macbook Air 13.3英寸笔记本电脑">
+                            <div class="rows-son1font1">
+                                <li class="font12-3">Apple Macbook Air 13.3英寸笔记本电脑 </li>
+                                <li class="font12-3">银色（Corei5）处理器/8GB内存</li>
+                            </div>
+                            <span class="font12-3 rows-son1font2" style="top: -56px;">颜色MzcBook爱人</span>
+                            <span class="font12-3 rows-son1font2" style="top: -38px;
+                            left: -144px;">尺寸：13.3英寸</span>
+                            <li class="font12-9 rows21-zp"><span>[赠品]圣迪威（Sendio）MacBook13.3寸屏幕保...</span><span>X1</span>
+                            </li>
+                            <li class="font12-9 rows21-zp"><span>[赠品]圣迪威（Sendio）MacBook13.3清洁套装</span><span>X1</span>
+                            </li>
+                        </div>
+                        <!-- 格子2 -->
+                        <div class="rows-son2">
+                            <span class="money">8488.00</span>
+                        </div>
+                        <div class="rows-son3">
+                            <div class="numbutton">
+                                <div class="but1 ">-</div>
+                                <div class="num money">1</div>
+                                <div class="but2 fontred">+</div>
+                            </div>
+                            <div class="font12-9" style="text-align: center;">有货</div>
+                        </div>
+                        <div class="rows-son4">
+                            <span class="money">8488.00</span>
+                        </div>
+                        <div class="rows-son5">
+                            <li class="font12-3">删除</li>
+                            <li class="font12-3">移到我的关注</li>
+                        </div>
+                    </label>
+                    <label for="check3th" class="rows rows3">
+                        <div class="rows-son1">
+                            <input type="checkbox" for="check3th" class="goods-label top-70" name="checkItems">
+                            <img src="./images/shoppingcar移动电源.png" alt="半岛铁盒移动电源A2200">
+                            <div class="rows-son1font1">
+                                <li class="font12-3">半岛铁盒移动电源A2200 </li>
+                                <li class="font12-3">白色2200mah</li>
+                                <li class="font12-9"><i class="img-gift"></i> 购买礼品包装</li>
+                            </div>
+                            <span class="font12-3 rows-son1font2">型号：A2200</span>
+                        </div>
+                        <div class="rows-son2">
+                            <span class="money">19.00</span>
+                        </div>
+                        <div class="rows-son3">
+                            <div class="numbutton">
+                                <div class="but1 ">-</div>
+                                <div class="num money">1</div>
+                                <div class="but2 fontred">+</div>
+                            </div>
+                            <div class="font12-9" style="text-align: center;">有货</div>
+                        </div>
+                        <div class="rows-son4">
+                            <span class="money">19.00</span>
+                        </div>
+                        <div class="rows-son5">
+                            <li class="font12-3">删除</li>
+                            <li class="font12-3">移到我的关注</li>
+                        </div>
+                    </label>
+                    <label for="check4th" class="rows rows4">
+                        <div class="rows-son1">
+                            <input type="checkbox" for="check4th" class="goods-label top-70" name="checkItems">
+                            <img src="./images/shppingcar苹果.png" alt="苹果（Apple）MD463FE/A MAC">
+                            <div class="rows-son1font1">
+                                <li class="font12-3">苹果（Apple）MD463FE/A MAC </li>
+                                <li class="font12-3">Thunderbolt雷电接口 至千兆以太网转</li>
+                                <li class="font12-9"><i class="img-gift"></i> 购买礼品包装</li>
+                            </div>
+                            <span class="font12-3 rows-son1font2">尺码：Thunderbolt至千兆...</span>
+                        </div>
+                        <div class="rows-son2">
+                            <span class="money">248.00</span>
+                        </div>
+                        <div class="rows-son3">
+                            <div class="numbutton">
+                                <div class="but1 ">-</div>
+                                <div class="num money">1</div>
+                                <div class="but2 fontred">+</div>
+                            </div>
+                            <div class="font12-9" style="text-align: center;">有货</div>
+                        </div>
+                        <div class="rows-son4">
+                            <span class="money">248.00</span>
+                        </div>
+                        <div class="rows-son5">
+                            <li class="font12-3">删除</li>
+                            <li class="font12-3">移到我的关注</li>
+                        </div>
+                    </label>
+                    <label for="check5th" class="rows rows5">
+                        <div class="rows-son1">
+                            <input type="checkbox" for="check5th" class="goods-label top-70" name="checkItems">
+                            <img src="./images/shoppingcar手机.png" alt="苹果（Apple）MD463FE/A MAC">
+                            <div class="rows-son1font1">
+                                <li class="font12-3">苹果（Apple）iPhone6(a1586) </li>
+                                <li class="font12-3">16g 金色移动联通</li>
+                                <li class="font12-9"><i class="img-gift"></i> 购买礼品包装</li>
+                            </div>
+                            <span class="font12-3 rows-son1font2">颜色：金色..</span>
+                        </div>
+                        <div class="rows-son2">
+                            <span class="money">3799.00</span>
+                        </div>
+                        <div class="rows-son3">
+                            <div class="numbutton">
+                                <div class="but1 ">-</div>
+                                <div class="num money">1</div>
+                                <div class="but2 fontred">+</div>
+                            </div>
+                            <div class="font12-9" style="text-align: center;">有货</div>
+                        </div>
+                        <div class="rows-son4">
+                            <span class="money">3799.00</span>
+                        </div>
+                        <div class="rows-son5">
+                            <li class="font12-3">删除</li>
+                            <li class="font12-3">移到我的关注</li>
+                        </div>
+                    </label>
+                </div>
+                <input type="checkbox" id="checkh1" hidden>
+                <h1 class="money checkh1"
+                    style="font-weight: normal;margin: 15px 0 ;border-bottom: 2px solid #dddddd;padding-bottom: 5px;">
+                    <label for="checkh1" class="goods-label"></label>神州数码专营店 </h1>
+                <div class="shoppinglist2">
+                    <div class="rows rows6">
+                        <!-- 格子1 -->
+                        <div class="rows-son1">
+                            <h1 style="margin: 0 0 10px;font-weight: normal;" class="font12-9"><a
+                                    class="fontred font12-9" href=""
+                                    style="display: inline-block;padding: 0px 7px;border: 1px solid #c81623;">换购</a><a
+                                    href="" class="font12-9"> 活动商品购满2888.00，即可加价换购商品1件
+                                    > </a><a href="" class="bgc-red" style="margin-left: 15px;">查看换购品</a> <a href=""
+                                    class="font12-9">去凑单 ></a></h1>
+                            <!-- <label for="check6th" class="goods-label top-70;" style="top: -47px;"></label> -->
+                            <img src="./images/shoppingcar戴尔.png" alt="Apple Macbook Air 13.3英寸笔记本电脑"
+                                style="margin: 15px;">
+                            <div class="rows-son1font1">
+                                <li class="font12-3">DELL 戴尔Ins 15MR-75 28SS15英寸</li>
+                                <li class="font12-3">银色（Corei5）处理器/8GB内存 </li>
+                            </div>
+                            <span class="font12-3 rows-son1font2" style="top: -56px;">颜色：银色</span>
+                            <span class="font12-3 rows-son1font2" style="top: -38px;
+                            left: -110px;">尺寸：13.3英寸</span>
+                            <li class="font12-9 rows21-zp"><span>[赠品]圣迪威（Sendio）MacBook13.3寸屏幕保...</span><span>X1</span>
+                            </li>
+                            <li class="font12-9 rows21-zp"><span>[赠品]圣迪威（Sendio）MacBook13.3清洁套装</span><span>X1</span>
+                            </li>
+                        </div>
+                        <!-- 格子2 -->
+                        <div class="rows-son2">
+                            <span class="money">3699.00</span>
+                        </div>
+                        <div class="rows-son3">
+                            <div class="numbutton">
+                                <div class="but1 ">-</div>
+                                <div class="num money">1</div>
+                                <div class="but2 fontred">+</div>
+                            </div>
+                            <div class="font12-9" style="text-align: center;">有货</div>
+                        </div>
+                        <div class="rows-son4">
+                            <span class="money">3699.00</span>
+                        </div>
+                        <div class="rows-son5">
+                            <li class="font12-3">删除</li>
+                            <li class="font12-3">移到我的关注</li>
+                        </div>
+                    </div>
+                </div>
+                <div class="under-menu" style="line-height: 35px;margin-bottom: 0;">
+                    <input type="checkbox" id="allcheckdel" hidden>
+                    <label for="allcheckdel" class="goods-label" style="position: relative;
+                    top: -11px;" id="checkWhole" name="goods-label"></label>
+                    <label for="checkzy" class="font12-3">全选</label>
+                    <a class="font12-3" href="" style="margin: 0 15px;">删除选中的商品 </a><a class="font12-3" href=""> 移到我的关注
+                    </a><a class="font12-3" href="" style="margin: 0 15px;"> 清除下柜商品</a>
+                    <div style="position: absolute;right: 0;">
+                        <span class="font12-3" style="position: relative; top: -8px;left: -28px;">已选择0件商品 &nbsp;
+                            总价（不含运费） ：<i class="fontred money">￥6283.00</i></span>&nbsp;
+                        <span class="font12-3" style="position: relative;left: -190px;top: 10px;">已节省： ￥20.00</span>
+                    </div>
+                    <a href="./品优购-提交订单.html" class="paybutton font12-3">结算</a>
+                </div>
+                <div class="del-tip font12-3">已删除商品，您可以重新购买或加关注：</div>
+                <div class="repurchase font12-9">
+                    <span>圣迪威（Sendio）MacBook13.3清洁套</span><span>8488.00</span><span>x1</span>
+                    <div style="display: inline-block;">
+                        <a href="" class="font12-9">重新购买</a>
+                        <a class="font12-9" href="">移到我的关注</a>
+                    </div>
+                </div>
+                <div class="shoppingcar-like">
+                    <div class="like-title"><a class="bgc-red" href="">猜你喜欢</a><a class="font12-3" href="">特惠购物</a>
+                    </div>
+                    <div class="like-content">
+                        <div class="like-contentdiv">
+                            <div><i class="like-img like-img1"></i><a class="join-shoppingc font12-3" href="">加入购物车</a>
+                            </div>
+                            <div><i class="like-img like-img2"></i><a class="join-shoppingc font12-3" href="">加入购物车</a>
+                            </div>
+                            <div><i class="like-img like-img3"></i><a class="join-shoppingc font12-3" href="">加入购物车</a>
+                            </div>
+                            <div><i class="like-img like-img4"></i><a class="join-shoppingc font12-3" href="">加入购物车</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer 开始 -->
+        <footer>
+            <div class="banxin" style="box-sizing: border-box;display: flex;height: 105px;">
+                <a class="foot1-a f-a1" href="">
+                    <i class="foot-img1"></i>
+                    <div class="foot1-font">
+                        <h4 class="foot-h4">正品保障</h4>
+                        <li class="foot-li">正品保障，提供发票</li>
+                    </div>
+                </a>
+                <a class="foot1-a f-a2" href="">
+                    <i class="foot-img2"></i>
+                    <div class="foot1-font">
+                        <h4 class="foot-h4">极速物流</h4>
+                        <li class="foot-li">急速物流，急速送达</li>
+                    </div>
+                </a>
+                <a class="foot1-a f-a3" href="">
+                    <i class="foot-img3"></i>
+                    <div class="foot1-font">
+                        <h4 class="foot-h4">无忧售后</h4>
+                        <li class="foot-li">7天无理由退换货</li>
+                    </div>
+                </a>
+                <a class="foot1-a f-a4" href="">
+                    <i class="foot-img4"></i>
+                    <div class="foot1-font">
+                        <h4 class="foot-h4">特色服务</h4>
+                        <li class="foot-li">私人定制家电套餐</li>
+                    </div>
+                </a>
+                <a class="foot1-a f-a5" href="">
+                    <i class="foot-img5"></i>
+                    <div class="foot1-font">
+                        <h4 class="foot-h4">帮助中心</h4>
+                        <li class="foot-li">您的购物指南</li>
+                    </div>
+                </a>
+            </div>
+            <div class="banxin"
+                style="height: 190px;box-sizing: border-box;display: flex;border-bottom: 1px solid #ededed;">
+                <dl>
+                    <dt>购物指南</dt>
+                    <dd>购物流程</dd>
+                    <dd>会员介绍</dd>
+                    <dd>生活旅行/团购</dd>
+                    <dd>常见问题</dd>
+                    <dd>大家电</dd>
+                    <dd>联系客服</dd>
+                </dl>
+                <dl>
+                    <dt>配送方式</dt>
+                    <dd>上门自提</dd>
+                    <dd>211限时达</dd>
+                    <dd>配送服务查询</dd>
+                    <dd>配送费收取标准</dd>
+                    <dd>海外配送</dd>
+                </dl>
+                <dl>
+                    <dt>支付方式</dt>
+                    <dd>货到付款</dd>
+                    <dd>在线支付</dd>
+                    <dd>分期付款</dd>
+                    <dd>邮局汇款</dd>
+                    <dd>公司转账</dd>
+                </dl>
+                <dl>
+                    <dt>售后服务</dt>
+                    <dd>售后政策</dd>
+                    <dd>价格保护</dd>
+                    <dd>退款说明</dd>
+                    <dd>返修/退换货</dd>
+                    <dd>取消订单</dd>
+                </dl>
+                <dl>
+                    <dt>特色服务</dt>
+                    <dd>夺宝岛</dd>
+                    <dd>DIY装机</dd>
+                    <dd>延保服务</dd>
+                    <dd>品优购E卡</dd>
+                    <dd>品优购通信</dd>
+                </dl>
+                <div class="help-region" style="text-align: center;">
+                    <h3>帮助中心</h3><img
+                        src="http://www.bmglpt.com:8080/WebFiles/PublicFiles/images/pinyougou/images/wx_cz.jpg"
+                        alt="品优购客户端"><br><span>品优购客户端</span>
+                </div>
+            </div>
+            <div class="banxin endfont">
+                <a href="">关于我们</a>|
+                <a href="">联系我们</a>|
+                <a href="">联系客服</a>|
+                <a href="">商家入驻</a>|
+                <a href="">营销中心</a>|
+                <a href="">手机品优购</a>|
+                <a href="">友情链接</a>|
+                <a href="">销售联盟</a>|
+                <a href="">品优购社区</a>|
+                <a href="">品优购公益</a>|
+                <a href="">English Site</a>|
+                <a href="">Contact U</a><br>
+                <span>地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100 邮箱: zhanghj+itcast.cn</span><br>
+                <span>京ICP备08001421号京公网安备110108007702</span>
+            </div>
+        </footer>
+    </div>
+    <script src="./购物车.js"></script>
+</body>
+
+</html>
